@@ -152,12 +152,15 @@
       const links = document.querySelectorAll("#navbar a");
       const currentPath = location.pathname;
 
-      // 获取当前所在目录名
+      const knownSections = ["gallery", "about_contact"];
+
       function getDir(path) {
         const parts = path.split("/").filter(Boolean);
-        if (parts.length === 0) return "";  // 根目录 = HOME
-        if (parts.length === 1) return "";  // /index.html 还是 HOME
-        return parts[0];  // gallery, blog, about, contact...
+        if (parts.length && parts[parts.length - 1].includes(".")) parts.pop();
+        for (let i = parts.length - 1; i >= 0; i--) {
+          if (knownSections.includes(parts[i])) return parts[i];
+        }
+        return "";
       }
 
       const currentDir = getDir(currentPath);
@@ -267,7 +270,7 @@
     <div class="category-row">
       <h2 class="category-title">Concept art</h2>
       <div class="gallery-grid">
-        <a class="item" href="/gallery/project_red_vein.html" target="_blank" rel="noopener noreferrer">
+        <a class="item" href="../gallery/project_red_vein.html" target="_blank" rel="noopener noreferrer">
           <img src="../images_videos/concept_art/project_red_vein/project_red_vein_cover.gif">
           <div class="overlay">
             <div class="overlay-text">

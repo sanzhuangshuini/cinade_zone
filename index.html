@@ -103,11 +103,15 @@
       const links = document.querySelectorAll("#navbar a");
       const currentPath = location.pathname;
 
+      const knownSections = ["gallery", "about_contact"];
+
       function getDir(path) {
         const parts = path.split("/").filter(Boolean);
-        if (parts.length === 0) return "";
-        if (parts.length === 1) return "";
-        return parts[0];
+        if (parts.length && parts[parts.length - 1].includes(".")) parts.pop();
+        for (let i = parts.length - 1; i >= 0; i--) {
+          if (knownSections.includes(parts[i])) return parts[i];
+        }
+        return "";
       }
 
       const currentDir = getDir(currentPath);
