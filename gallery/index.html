@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>gallery</title>
+
+  <link rel="stylesheet" type="text/css" href="../css_styles/style.css">
+
+  <script src="libraries/p5.min.js"></script>
+  <script src="libraries/p5.sound.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.164/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.164/examples/js/controls/OrbitControls.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: #fff;
+      display: flex;
+      /* 让左栏 + 右侧内容并排 */
+      min-height: 100vh;
+    }
+
+    /* 左侧 Sidebar（由原 navbar 改造） */
+    #navbar {
+      position: fixed;
+      /* 不再固定顶部 */
+      width: 350px;
+      height: 100vh;
+      /* 占满整条左侧 */
+      background-color: rgba(243, 243, 243, 0);
+      display: flex;
+      flex-direction: column;
+      /* 改成竖排 */
+      align-items: flex-start;
+      /* 左对齐 */
+      justify-content: flex-start;
+      gap: 190px;
+      padding: 20px;
+      padding-left: 20px;
+      box-sizing: border-box;
+      z-index: 9999;
+    }
+
+    /* logo 样式保留 */
+    #navbar #logo {
+      width: 50px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    /* 链接样式保留，但适配竖排 */
+    #navbar a {
+      font-size: 1em;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      color: #1f1f1f;
+    }
+
+    /* 当前高亮 */
+    #navbar a.active {
+      color: #9eba4a !important;
+      /* text-decoration: underline !important; */
+    }
+
+    #navbar a:hover {
+      color: #9eba4a;
+    }
+
+    /* 右侧主内容区 —— 占满整个右边空间 */
+    #main-area {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+      overflow: scroll;
+      scrollbar-width: none;
+      /* Firefox 隐藏滚动条 */
+      position: relative;
+      /* 允许内部绝对定位 */
+      background: #fff;
+    }
+
+    #main-area::-webkit-scrollbar {
+      display: none;
+      /* Chrome、Safari、Edge 隐藏滚动条 */
+    }
+
+    html,
+    body {
+      overflow: scroll;
+      /* 禁止外层滚动条 */
+    }
+
+    body::-webkit-scrollbar,
+    html::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* 整页背景图层（覆盖所有，包括 navbar） */
+    #hover-bg {
+      position: fixed;
+      top: -30px;
+      left: -30px;
+      width: calc(100vw + 60px);
+      height: calc(100vh + 60px);
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      /* 背景图模糊，但不影响前景 */
+      filter: blur(18px);
+
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* 删除所有毛玻璃相关效果 —— 确保前景没有 blur */
+    body.hovering .category-row,
+    body.hovering #navbar {
+      /* 不再增加任何透明或毛玻璃效果 */
+      background-color: transparent !important;
+      backdrop-filter: none !important;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="hover-bg"></div>
+
+  <!-- 左侧 Sidebar -->
+  <nav id="navbar">
+    <a href="/index.html">
+      <img id="logo" src="../images_videos/logo.png">
+    </a>
+    <a href="/index.html">HOME</a>
+    <a href="/gallery/index.html">GALLERY</a>
+    <a href="/about_contact/index.html">ABOUT & CONTACT</a>
+  </nav>
+
+
+  <script>
+    (function () {
+      const links = document.querySelectorAll("#navbar a");
+      const currentPath = location.pathname;
+
+      // 获取当前所在目录名
+      function getDir(path) {
+        const parts = path.split("/").filter(Boolean);
+        if (parts.length === 0) return "";  // 根目录 = HOME
+        if (parts.length === 1) return "";  // /index.html 还是 HOME
+        return parts[0];  // gallery, blog, about, contact...
+      }
+
+      const currentDir = getDir(currentPath);
+
+      links.forEach(a => {
+        const url = new URL(a.href, location.origin);
+        const linkDir = getDir(url.pathname);
+
+        if (linkDir === currentDir) {
+          a.classList.add("active");
+        }
+      });
+
+    })();
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const bg = document.getElementById("hover-bg");
+      const items = document.querySelectorAll(".gallery-grid .item");
+
+      items.forEach(item => {
+        item.addEventListener("mouseenter", () => {
+          const img = item.querySelector("img");
+          if (img) {
+            bg.style.backgroundImage = `url(${img.src})`;
+            bg.style.opacity = 1;
+            document.body.classList.add("hovering");
+          }
+        });
+
+        item.addEventListener("mouseleave", () => {
+          bg.style.opacity = 0;
+          document.body.classList.remove("hovering");
+        });
+      });
+    });
+  </script>
+
+  <div id="gallery-wrapper">
+
+    <!-- Category 1 -->
+    <div class="category-row">
+      <h2 class="category-title">Game</h2>
+
+      <div class="gallery-grid">
+        <a class="item"
+          href="https://vimeo.com/1008360433?autoplay=1&muted=1&stream_id=Y2xpcHN8MjI2MjUxNjM0fGlkOmRlc2N8W10%3D"
+          target="_blank" rel="noopener noreferrer">
+          <img src="/images_videos/game/oops_lights_out/oops_lights_out_cover.gif">
+          <div class="overlay">
+            <div class="overlay-text">
+              <div class="title">Oops! Lights Out!</div>
+              <div class="desc">A 3D maze game that emphasizes the use of human senses in playing a game beyond vision
+                and demonstrates how the sighted can draw inspiration from the visually impaired to address Metaverse
+                Exhaustion</div>
+              <div class="desc">*Director, Producer, Designer, 2D Artist, 3D Artist, 3D Animator, Technical Artist,
+                Sound Designer, Tester*</div>
+              <div class="desc">2024</div>
+            </div>
+          </div>
+        </a>
+
+        
+
+        <a class="item" href="https://store.steampowered.com/app/3926180/_/" target="_blank" rel="noopener noreferrer">
+          <img src="/images_videos/game/perilous_light/perilous_light_cover.gif">
+          <div class="overlay">
+            <div class="overlay-text">
+              <div class="title">Perilous Light</div>
+              <div class="desc">A 2D puzzle-platformer where the player plays the role of a vampire who has survived a
+                deadly mining scam</div>
+              <div class="desc">*Director, Producer, Narrative Designer, 2D Environment Artist, one of the Technical
+                Artists, one of the Sound Designers*</div>
+              <div class="desc">2023</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Category 2 -->
+    <div class="category-row">
+      <h2 class="category-title">Multimedia storytelling</h2>
+
+      <div class="gallery-grid">
+
+        <a class="item"
+          href="https://vimeo.com/1006124703?autoplay=1&muted=1&stream_id=Y2xpcHN8MjI2MjUxNjM0fGlkOmRlc2N8W10%3D"
+          target="_blank" rel="noopener noreferrer">
+          <img src="/images_videos/multimedia_storytelling/sky_lake/sky_lake_cover.gif">
+          <div class="overlay">
+            <div class="overlay-text">
+              <div class="title">Sky Lake</div>
+              <div class="desc">An animation piece reflecting on intimate relationship made in Unity</div>
+              <div class="desc">*Director, Narrative Designer, 2D Artist, 3D Artist, 3D Animator, Technical Artist,
+                Voice Actor, Editor, Colorist, Subtitle Artist*</div>
+              <div class="desc">2024</div>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Category 3 -->
+    <div class="category-row">
+      <h2 class="category-title">Concept art</h2>
+      <div class="gallery-grid">
+        <a class="item" href="/gallery/project_red_vein.html" target="_blank" rel="noopener noreferrer">
+          <img src="/images_videos/concept_art/project_red_vein/project_red_vein_cover.gif">
+          <div class="overlay">
+            <div class="overlay-text">
+              <div class="title">Project Red Vein</div>
+              <div class="desc">A set of art demostration of an encounter sequence from a conceptual game</div>
+              <div class="desc">*Director, one of the Narrative Designers, 2D Concept Artist, 3D Artist, one of the
+                Riggers, 3D Animator, Technical Artist, one of the Voice Actors*</div>
+              <div class="desc"><span style="color: #e30a0a; font-weight: bold;">⚠Warning: containing
+                  body horror⚠</span></div>
+              <div class="desc">2026</div>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+
+</body>
+
+</html>

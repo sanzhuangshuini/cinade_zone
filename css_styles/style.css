@@ -1,0 +1,357 @@
+/* ================================
+   全局基础样式
+================================ */
+html,
+body {
+  font-family: "Helvetica", "Microsoft YaHei";
+  /* 全局字体 */
+  font-size: 16px;
+  /* 基础字号 */
+  line-height: 1.6;
+  /* 行距 */
+  color: #1f1f1f;
+  /* 主文字颜色 */
+  /* background-color: #fff; */
+  /* 页面背景（可选） */
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+
+/* ================================
+   标题层级（全局）
+================================ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1em 0 0.5em 0;
+  line-height: 1.2;
+  color: #1f1f1f;
+}
+
+h1 {
+  font-size: 2.25em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.75em;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+h6 {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+
+/* ================================
+   文本与段落
+================================ */
+p {
+  margin: 0;
+  /* 无额外外边距 */
+  font-size: 1em;
+  line-height: 1.7;
+}
+
+/* 链接 */
+a {
+  color: #1f1f1f;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #96b351;
+  text-decoration: underline;
+}
+
+/* 引用与文本修饰 */
+quote {
+  color: #96b351;
+  font-style: italic;
+  background: #f4f4f4;
+}
+
+bold {
+  font-weight: bold;
+}
+
+/* 强调：知识点 / 待解决问题 */
+emph1 {
+  background: #e5f56c;
+}
+
+emph2 {
+  background: #fff351;
+}
+
+
+/* ================================
+   代码与预格式化文本
+================================ */
+pre code {
+  font-family: "Consolas", "Microsoft YaHei", monospace;
+  font-size: 16px;
+  background: #f4f4f4;
+  padding: 15px;
+  display: block;
+  white-space: pre-wrap;
+  /* 自动换行 */
+}
+
+
+/* ================================
+   正文内容（#post-body）
+   — 图片 / 视频 / 音频 / 缩略图
+================================ */
+
+/* === 图片 === */
+#post-body .image-row {
+  display: flex;
+  flex-wrap: wrap;
+  /* 超出换行 */
+  gap: 30px;
+  /* 图片间距 */
+  align-items: flex-start;
+  margin: 12px 0 12px 40px;
+  /* 左缩进，区分文字 */
+}
+
+/* 单张图片（自适应宽） */
+#post-body .image-row img {
+  flex: 1 1 300px;
+  /* 等比自适应 */
+  max-width: 40%;
+  height: auto;
+  display: block;
+  margin: 0;
+  /* 间距交给 gap 控制 */
+}
+
+/* 指定列数 */
+#post-body .image-row.cols-2 img {
+  flex-basis: calc((100% - 12px) / 2);
+}
+
+#post-body .image-row.cols-3 img {
+  flex-basis: calc((100% - 12px * 2) / 3);
+}
+
+#post-body .image-row.cols-4 img {
+  flex-basis: calc((100% - 12px * 3) / 4);
+}
+
+/* 等高裁剪（缩略图墙） */
+#post-body .thumb-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+#post-body .thumb-row img {
+  flex: 1 1 240px;
+  height: 180px;
+  /* 固定高度 */
+  width: 100%;
+  object-fit: cover;
+  /* 居中裁剪防变形 */
+  display: block;
+  margin: 0;
+}
+
+/* === 视频 === */
+#post-body video {
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: 12px 0 12px 40px;
+  /* 与图片左缩进一致 */
+  background: #1f1f1f;
+  /* 未加载背景色 */
+}
+
+/* === 音频 === */
+#post-body audio {
+  width: 80%;
+  margin: 12px 0 12px 40px;
+  /* 与图片左缩进一致 */
+}
+
+
+/* ================================
+   可交互内容
+================================ */
+
+/* === three.js首页翻翻乐 === */
+#sketchbook-canvas {
+  position: absolute;
+  /* 让画布浮起来 */
+  top: 0;
+  /* 紧贴浏览器顶部 */
+  left: 0;
+  /* 从最左边开始 */
+  width: 100%;
+  /* 横向铺满整个窗口 */
+  height: 100vh;
+  /* 纵向铺满整个窗口 */
+  display: block;
+  overflow: hidden;
+}
+
+/* ================================
+   Gallery页面的作品展示格子
+================================ */
+
+/* Gallery wrapper：控制 navbar 和 gallery 内容间距 */
+#gallery-wrapper {
+  margin-left: 220px;
+  /* ← 与 navbar 的水平间距（可调） */
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px; 
+  /* ← grid 最右侧与页面边缘留 20px */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+/* 每个分类区块布局：左侧标题 + 右侧作品区 */
+.category-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  /* ← title 列宽 × 控制 title → items 的水平距离 */
+  column-gap: 5px;
+  /* ← title 到 items-grid 的水平 gap（可调） */
+  align-items: start;
+}
+
+
+/* 分类标题样式 */
+.category-title {
+  margin: 0;
+  padding-left: 10px;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: rgb(214, 214, 214);
+  text-align: right;
+  transition: color 0.2s ease;  /* ← 新增：渐变动画 */
+}
+
+
+/* 右侧作品区（固定宽度 item，不随窗口缩小） */
+.category-row .gallery-grid {
+  display: flex;
+  /* ← 不用 grid，用 flex 才能让固定宽度的 item 不被压缩 */
+  flex-wrap: wrap;
+  /* 换行排列 */
+  gap: 6px;
+  padding-right: 20px;
+  /* 确保最右 item 有 20px 空白 */
+}
+
+
+
+/* 单个作品（固定宽度，不会随着窗口缩小） */
+.item {
+  position: relative;
+  width: 400px;
+  /* ← 固定 GIF 大小，你想要的“不会变小” */
+  height: auto;
+  overflow: hidden;
+}
+
+
+/* 图片本体 */
+.item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.item:hover img {
+  transform: scale(1.25);
+}
+
+
+/* 覆盖层：容器 */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity .3s ease, background .3s ease;
+}
+
+/* 覆盖层内的整体文字区 */
+.overlay-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  /* 标题与描述的距离 */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+/* 标题 */
+.overlay .title {
+  color: #ffffff;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+/* 描述 */
+.overlay .desc {
+  color: #ffffff;
+  font-size: 1em;
+  text-align: center;
+  line-height: 1.3;
+  max-width: 80%;
+}
+
+/* Hover 时：背景淡入、文字区淡入 */
+.item:hover .overlay {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.item:hover .overlay-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover 效果：整个 category-row 内任意位置被 hover，标题变黑 */
+.category-row:hover .category-title {
+  color: #1f1f1f;
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>contact</title>
+
+  <link rel="stylesheet" type="text/css" href="../css_styles/style.css">
+
+  <script src="libraries/p5.min.js"></script>
+  <script src="libraries/p5.sound.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.164/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.164/examples/js/controls/OrbitControls.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: #fff;
+      display: flex;
+      /* 让左栏 + 右侧内容并排 */
+      height: 100vh;
+    }
+
+    /* 左侧 Sidebar（由原 navbar 改造） */
+    #navbar {
+      position: fixed;
+      /* 不再固定顶部 */
+      width: 350px;
+      height: 100vh;
+      /* 占满整条左侧 */
+      background-color: rgba(243, 243, 243, 0);
+      display: flex;
+      flex-direction: column;
+      /* 改成竖排 */
+      align-items: flex-start;
+      /* 左对齐 */
+      justify-content: flex-start;
+      gap: 190px;
+      padding: 20px;
+      padding-left: 20px;
+      box-sizing: border-box;
+      z-index: 9999;
+    }
+
+    /* logo 样式保留 */
+    #navbar #logo {
+      width: 50px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    /* 链接样式保留，但适配竖排 */
+    #navbar a {
+      font-size: 1em;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      color: #1f1f1f;
+    }
+
+    /* 当前高亮 */
+    #navbar a.active {
+      color: #9eba4a !important;
+      /* text-decoration: underline !important; */
+    }
+
+    #navbar a:hover {
+      color: #9eba4a;
+    }
+
+    /* 右侧主内容区 */
+    #main-area {
+      flex: 1;
+      margin-left: 100px;
+      /* 让内容不被 navbar 覆盖 */
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      /* 水平居中 */
+      align-items: center;
+      /* 垂直居中 */
+      overflow: hidden;
+      /* 不出现滚动条 */
+    }
+
+    /* 居中的 contact 容器 */
+    .contact-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 40px;
+    }
+
+    /* 左侧竖图 */
+    .business-card {
+      width: 320px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .business-card {
+      transition: filter 0.3s ease;
+    }
+
+    .business-card:hover {
+      filter: blur(10px) sepia(0.3);
+    }
+
+    /* 右侧文字 */
+    .contact-text p {
+      margin: 25px 0;
+      /* 控制段落之间的距离 */
+      text-align: left;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- 左侧 Sidebar -->
+  <nav id="navbar">
+    <a href="/index.html">
+      <img id="logo" src="../images_videos/logo.png">
+    </a>
+    <a href="/index.html">HOME</a>
+    <a href="/gallery/index.html">GALLERY</a>
+    <a href="/about_contact/index.html">ABOUT & CONTACT</a>
+  </nav>
+
+  <!-- 右侧内容 -->
+  <div id="main-area">
+    <div class="contact-container">
+
+      <!-- 左侧竖图 -->
+      <img class="business-card" src="/images_videos/contact/business_card.png" alt="business card">
+
+      <!-- 右侧文字 -->
+      <div class="contact-text">
+        <p>Personal Email: <a href="mailto:liu749762@gmail.com">liu749762@gmail.com</a></p>
+        <p>Academic Email: <a href="mailto:yl13787@nyu.edu">yl13787@nyu.edu</a></p>
+        <p>Instagram: <a href="https://www.instagram.com/dogzone6_/" target="_blank"
+            rel="noopener noreferrer">@dogzone6_</a></p>
+        <p>Xiaohongshu: <a href="https://www.xiaohongshu.com/user/profile/60e15395000000002002c945" target="_blank"
+            rel="noopener noreferrer">@散装水泥</a></p>
+        <p>Vimeo: <a href="https://vimeo.com/user226251634" target="_blank"
+            rel="noopener noreferrer">@Max Liu</a></p>
+        <p>My Languages: Chinese and English</p>
+        <p>Current Base: Brooklyn, New York</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script>
+    (function () {
+      const links = document.querySelectorAll("#navbar a");
+      const currentPath = location.pathname;
+
+      // 获取当前所在目录名
+      function getDir(path) {
+        const parts = path.split("/").filter(Boolean);
+        if (parts.length === 0) return "";  // 根目录 = HOME
+        if (parts.length === 1) return "";  // /index.html 还是 HOME
+        return parts[0];  // gallery, blog, about, contact...
+      }
+
+      const currentDir = getDir(currentPath);
+
+      links.forEach(a => {
+        const url = new URL(a.href, location.origin);
+        const linkDir = getDir(url.pathname);
+
+        if (linkDir === currentDir) {
+          a.classList.add("active");
+        }
+      });
+
+    })();
+  </script>
+
+</body>
+
+</html>

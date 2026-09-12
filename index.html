@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>home</title>
+
+  <link rel="stylesheet" type="text/css" href="css_styles/style.css">
+
+  <style>
+    body {
+      margin: 0;
+      background: #fff;
+      display: flex;
+      height: 100vh;
+    }
+
+    #navbar {
+      position: fixed;
+      width: 500px;
+      height: 100vh;
+      background-color: rgba(243, 243, 243, 0);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 190px;
+      padding: 20px;
+      padding-left: 380px;
+      box-sizing: border-box;
+      z-index: 9999;
+    }
+
+    #side-logo {
+      position: fixed;
+      left: -180px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 420px;
+      height: auto;
+      z-index: 9999;
+    }
+
+    #navbar a {
+      font-size: 1em;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      color: #ffffff;
+    }
+
+    #navbar a.active {
+      color: #9eba4a !important;
+    }
+
+    #navbar a:hover {
+      color: #9eba4a;
+    }
+
+    #main-area {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      background: #fff;
+    }
+
+    .plant-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <a href="index.html">
+    <img id="side-logo" src="images_videos/logo_white.png">
+  </a>
+
+  <nav id="navbar">
+    <a href="/index.html">HOME</a>
+    <a href="/gallery/index.html">GALLERY</a>
+    <a href="/about_contact/index.html">ABOUT & CONTACT</a>
+  </nav>
+
+  <div id="main-area">
+    <div>
+      <img class="plant-img" src="/images_videos/homepage/home.gif" alt="plant">
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const links = document.querySelectorAll("#navbar a");
+      const currentPath = location.pathname;
+
+      function getDir(path) {
+        const parts = path.split("/").filter(Boolean);
+        if (parts.length === 0) return "";
+        if (parts.length === 1) return "";
+        return parts[0];
+      }
+
+      const currentDir = getDir(currentPath);
+
+      links.forEach(a => {
+        const url = new URL(a.href, location.origin);
+        const linkDir = getDir(url.pathname);
+
+        if (linkDir === currentDir) {
+          a.classList.add("active");
+        }
+      });
+
+    })();
+  </script>
+
+</body>
+
+</html>
