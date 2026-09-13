@@ -212,7 +212,7 @@ body.home #navbar a:active {
     flex-direction: row;
     align-items: flex-end;
     justify-content: center;
-    gap: 30px;
+    gap: 45px;
     background-color: transparent;
   }
 
