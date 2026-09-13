@@ -199,6 +199,30 @@ body.home #navbar a:hover {
   color: #9eba4a;
 }
 
+@media (max-width: 768px) {
+  body.home #navbar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 110px;
+    padding: 0 16px;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 40px;
+    background-color: transparent;
+  }
+
+  body.home #navbar a {
+    font-size: 0.7em;
+    white-space: nowrap;
+    transform: rotate(-70deg);
+    transform-origin: left center;
+  }
+}
+
 
 /* ================================
    正文内容（#post-body）
