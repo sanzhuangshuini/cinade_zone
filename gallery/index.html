@@ -24,53 +24,6 @@
       min-height: 100vh;
     }
 
-    /* 左侧 Sidebar（由原 navbar 改造） */
-    #navbar {
-      position: fixed;
-      /* 不再固定顶部 */
-      width: 350px;
-      height: 100vh;
-      /* 占满整条左侧 */
-      background-color: rgba(243, 243, 243, 0);
-      display: flex;
-      flex-direction: column;
-      /* 改成竖排 */
-      align-items: flex-start;
-      /* 左对齐 */
-      justify-content: flex-start;
-      gap: 190px;
-      padding: 20px;
-      padding-left: 20px;
-      box-sizing: border-box;
-      z-index: 9999;
-    }
-
-    /* logo 样式保留 */
-    #navbar #logo {
-      width: 50px;
-      height: auto;
-      margin-bottom: 20px;
-    }
-
-    /* 链接样式保留，但适配竖排 */
-    #navbar a {
-      font-size: 1em;
-      font-weight: bold;
-      text-decoration: none;
-      transition: color 0.2s ease;
-      color: #1f1f1f;
-    }
-
-    /* 当前高亮 */
-    #navbar a.active {
-      color: #9eba4a !important;
-      /* text-decoration: underline !important; */
-    }
-
-    #navbar a:hover {
-      color: #9eba4a;
-    }
-
     /* 右侧主内容区 —— 占满整个右边空间 */
     #main-area {
       flex: 1;

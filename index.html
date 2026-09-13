@@ -17,46 +17,14 @@
       height: 100vh;
     }
 
-    #navbar {
-      position: fixed;
-      width: 500px;
-      height: 100vh;
-      background-color: rgba(243, 243, 243, 0);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 190px;
-      padding: 20px;
-      padding-left: 380px;
-      box-sizing: border-box;
-      z-index: 9999;
-    }
-
     #side-logo {
       position: fixed;
-      left: -180px;
+      left: 50%;
       top: 50%;
-      transform: translateY(-50%);
+      transform: translate(-50%, -50%);
       width: 420px;
       height: auto;
       z-index: 9999;
-    }
-
-    #navbar a {
-      font-size: 1em;
-      font-weight: bold;
-      text-decoration: none;
-      transition: color 0.2s ease;
-      color: #ffffff;
-    }
-
-    #navbar a.active {
-      color: #9eba4a !important;
-    }
-
-    #navbar a:hover {
-      color: #9eba4a;
     }
 
     #main-area {
@@ -86,7 +54,7 @@
         flex-direction: column;
       }
 
-      #navbar {
+      body.home #navbar {
         position: fixed;
         top: auto;
         bottom: 0;
@@ -101,7 +69,7 @@
         background-color: transparent;
       }
 
-      #navbar a {
+      body.home #navbar a {
         font-size: 0.7em;
         white-space: nowrap;
         transform: rotate(-70deg);
@@ -133,7 +101,7 @@
 
 </head>
 
-<body>
+<body class="home">
 
   <a href="index.html">
     <img id="side-logo" src="images_videos/logo_white.png">
