@@ -76,6 +76,54 @@
       height: 100%;
       object-fit: cover;
     }
+
+    @media (max-width: 768px) {
+      html, body {
+        overflow-x: hidden;
+      }
+
+      body {
+        flex-direction: column;
+      }
+
+      #navbar {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 110px;
+        padding: 0 16px;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 0;
+        background-color: rgba(0, 0, 0, 0.35);
+      }
+
+      #navbar a {
+        font-size: 0.7em;
+        white-space: nowrap;
+        transform: rotate(-70deg);
+        transform-origin: left center;
+      }
+
+      #side-logo {
+        left: 50%;
+        top: auto;
+        bottom: 25px;
+        width: 60px;
+        transform: translateX(-50%);
+      }
+
+      #main-area {
+        height: 100vh;
+      }
+
+      .plant-img {
+        object-position: left center;
+      }
+    }
   </style>
 
 </head>
