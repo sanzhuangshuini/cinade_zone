@@ -115,6 +115,21 @@
       .business-card {
         width: 200px;
       }
+
+      /* 手机端：点击 logo 切换模糊+文字效果，不依赖鼠标悬浮 */
+      .logo-hover.active .business-card {
+        filter: blur(10px) sepia(0.3);
+      }
+
+      .logo-hover.active .logo-hover-text {
+        opacity: 1;
+      }
+
+      /* logo 下方联系信息的行距，改小到跟上面 description 文字一致 */
+      .contact-text p {
+        margin: 6px 0;
+        line-height: 1.6;
+      }
     }
   </style>
 
@@ -183,6 +198,22 @@
       });
 
     })();
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const logoHover = document.querySelector(".logo-hover");
+      if (!logoHover) return;
+
+      logoHover.addEventListener("click", (e) => {
+        e.stopPropagation();
+        logoHover.classList.toggle("active");
+      });
+
+      document.addEventListener("click", () => {
+        logoHover.classList.remove("active");
+      });
+    });
   </script>
 
 </body>
