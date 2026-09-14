@@ -159,6 +159,32 @@ body.subpage #navbar a:active {
   color: #9eba4a;
 }
 
+@media (max-width: 768px) {
+  body.subpage #navbar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 130px;
+    padding: 0 0 0 60px;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 50px;
+    background-color: transparent;
+  }
+
+  body.subpage #navbar a {
+    font-size: 1.1em;
+    white-space: normal;
+    text-align: center;
+    max-width: 90px;
+    transform: rotate(-70deg);
+    transform-origin: left center;
+  }
+}
+
 
 /* ================================
    首页（index.html）专属导航栏样式
@@ -212,7 +238,7 @@ body.home #navbar a:active {
   }
 
   body.home #navbar a {
-    font-size: 1.1 em;
+    font-size: 1.1em;
     white-space: normal;
     text-align: center;
     max-width: 90px;
@@ -452,4 +478,36 @@ body.home #navbar a:active {
 /* Hover 效果：整个 category-row 内任意位置被 hover，标题变黑 */
 .category-row:hover .category-title {
   color: #1f1f1f;
+}
+
+
+/* ================================
+   Gallery页面窄屏适配
+   （必须放在上面 .category-row / .item 等基础规则之后，
+     否则同优先级下会被后面的基础规则覆盖）
+================================ */
+@media (max-width: 768px) {
+  #gallery-wrapper {
+    margin-left: 0;
+    padding-bottom: 130px;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .category-row {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    width: 450px;
+    max-width: 100%;
+  }
+
+  .category-title {
+    text-align: left;
+    padding-left: 0;
+  }
+
+  .item {
+    width: 450px;
+    max-width: 100%;
+  }
 }

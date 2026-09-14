@@ -68,6 +68,29 @@
       /* 控制段落之间的距离 */
       text-align: left;
     }
+
+    @media (max-width: 768px) {
+      html, body {
+        overflow-x: hidden;
+      }
+
+      #main-area {
+        margin-left: 0;
+        overflow-y: auto;
+        padding: 20px;
+        padding-bottom: 150px;
+        box-sizing: border-box;
+      }
+
+      .contact-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .business-card {
+        width: 200px;
+      }
+    }
   </style>
 
 </head>
