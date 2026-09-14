@@ -47,19 +47,44 @@
       gap: 40px;
     }
 
+    /* 左侧竖图 + 悬浮文字 的层叠容器 */
+    .logo-hover {
+      position: relative;
+      display: inline-block;
+    }
+
     /* 左侧竖图 */
     .business-card {
       width: 320px;
       height: auto;
       object-fit: cover;
-    }
-
-    .business-card {
+      display: block;
       transition: filter 0.3s ease;
     }
 
-    .business-card:hover {
+    .logo-hover:hover .business-card {
       filter: blur(10px) sepia(0.3);
+    }
+
+    /* 悬浮在 logo 上的文字，居中层叠、左对齐 */
+    .logo-hover-text {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      transform: translateY(-50%);
+      margin: 0;
+      padding: 0 20px;
+      box-sizing: border-box;
+      text-align: left;
+      color: #1f1f1f;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .logo-hover:hover .logo-hover-text {
+      opacity: 1;
     }
 
     /* 右侧文字 */
@@ -108,21 +133,22 @@
   <div id="main-area">
     <div class="contact-container">
 
-      <!-- 左侧竖图 -->
-      <img class="business-card" src="../images_videos/logo.png" alt="business card">
+      <!-- 左侧竖图 + 悬浮显示的文字 -->
+      <div class="logo-hover">
+        <img class="business-card" src="../images_videos/logo.png" alt="business card">
+        <p class="logo-hover-text"><bold>Studio Description. Currently based in Brooklyn, NY. The rest hasn't been decided yet.</bold></p>
+      </div>
 
       <!-- 右侧文字 -->
       <div class="contact-text">
-        <p>Personal Email: <a href="mailto:liu749762@gmail.com">liu749762@gmail.com</a></p>
-        <p>Academic Email: <a href="mailto:yl13787@nyu.edu">yl13787@nyu.edu</a></p>
+        <p>Email: <a href="mailto:cinadezone@gmail.com">cinadezone@gmail.com</a></p>
         <p>Instagram: <a href="https://www.instagram.com/dogzone6_/" target="_blank"
             rel="noopener noreferrer">@dogzone6_</a></p>
         <p>Xiaohongshu: <a href="https://www.xiaohongshu.com/user/profile/60e15395000000002002c945" target="_blank"
             rel="noopener noreferrer">@散装水泥</a></p>
         <p>Vimeo: <a href="https://vimeo.com/user226251634" target="_blank"
             rel="noopener noreferrer">@Max Liu</a></p>
-        <p>My Languages: Chinese and English</p>
-        <p>Current Base: Brooklyn, New York</p>
+        <p>Languages: Chinese and English</p>
       </div>
 
     </div>
