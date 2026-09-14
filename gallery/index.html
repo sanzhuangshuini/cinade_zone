@@ -86,6 +86,26 @@
       html, body {
         overflow-x: hidden;
       }
+
+      /* 手机端取消整页背景毛玻璃效果 */
+      #hover-bg {
+        display: none;
+      }
+
+      /* 手机端：滑到 workbox 时直接显示悬浮信息，不需要鼠标悬浮 */
+      .item.in-view img {
+        transform: scale(1.25);
+      }
+
+      .item.in-view .overlay {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.35);
+      }
+
+      .item.in-view .overlay-text {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 
@@ -153,6 +173,31 @@
           document.body.classList.remove("hovering");
         });
       });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".gallery-grid .item");
+      if (!items.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          entry.target.classList.toggle("in-view", entry.isIntersecting);
+        });
+      }, { rootMargin: "-40% 0px -40% 0px", threshold: 0 });
+
+      items.forEach(item => observer.observe(item));
+
+      // 最后一个 box 可能永远达不到 50% 可视阈值（滚动空间不够），
+      // 滑到页面最底部时强制显示它的悬浮信息
+      const lastItem = items[items.length - 1];
+      window.addEventListener("scroll", () => {
+        const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+        if (atBottom) {
+          lastItem.classList.add("in-view");
+        }
+      }, { passive: true });
     });
   </script>
 
