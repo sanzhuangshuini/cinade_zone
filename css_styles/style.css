@@ -492,6 +492,7 @@ body.home #navbar a:active {
     padding-bottom: 130px;
     gap: 50px;
     align-items: center;
+    width: 100%;
   }
 
   .category-row {
