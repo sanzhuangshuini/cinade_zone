@@ -98,6 +98,39 @@
             justify-content: center;
             padding: 80px 0 8px;
         }
+
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .page-container,
+            .full-page-container {
+                width: 100%;
+                padding-left: 16px;
+                padding-right: 16px;
+                box-sizing: border-box;
+            }
+
+            .content-block,
+            .video-wrapper,
+            .intro,
+            .gallery {
+                width: 100%;
+            }
+
+            video {
+                width: 100%;
+            }
+
+            .gallery {
+                column-count: 1;
+            }
+
+            .cinema-section {
+                padding: 24px 0 8px;
+            }
+        }
     </style>
 </head>
 
