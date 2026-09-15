@@ -17,14 +17,45 @@
       height: 100vh;
     }
 
-    #side-logo {
+    .home-logo-hover {
       position: fixed;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 420px;
-      height: auto;
       z-index: 9999;
+      mix-blend-mode: overlay;
+    }
+
+    #side-logo {
+      display: block;
+      width: 400px;
+      height: auto;
+      transition: filter 0.3s ease;
+    }
+
+    .home-logo-hover:hover #side-logo {
+      filter: blur(10px) sepia(0.3);
+    }
+
+    .home-logo-hover-text {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      transform: translateY(-50%);
+      margin: 0;
+      padding: 0 20px;
+      box-sizing: border-box;
+      text-align: center;
+      color: #ffffff;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .home-logo-hover:hover .home-logo-hover-text {
+      opacity: 1;
     }
 
     #main-area {
@@ -56,12 +87,14 @@
         min-height: 100vh;
       }
 
-      #side-logo {
+      .home-logo-hover {
         left: 50%;
         top: 50%;
-        bottom: auto;
-        width: 180px;
         transform: translate(-50%, -50%);
+      }
+
+      #side-logo {
+        width: 180px;
       }
 
       #main-area {
@@ -87,9 +120,12 @@
 
 <body class="home">
 
-  <a href="index.html">
-    <img id="side-logo" src="images_videos/logo_white.png">
-  </a>
+  <div class="home-logo-hover">
+    <a href="index.html">
+      <img id="side-logo" src="images_videos/logo/original_white.png">
+    </a>
+    <p class="home-logo-hover-text"><bold>CinadeZone Studio<br>Game<br>Multimedia<br>Concept Art</bold></p>
+  </div>
 
   <nav id="navbar">
     <a href="./index.html">HOME</a>

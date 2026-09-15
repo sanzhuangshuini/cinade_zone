@@ -213,12 +213,12 @@ body.home #navbar a {
 }
 
 body.home #navbar a.active {
-  color: #9eba4a !important;
+  color: #ac2c2c !important;
 }
 
 body.home #navbar a:hover,
 body.home #navbar a:active {
-  color: #9eba4a;
+  color: #ac2c2c;
 }
 
 @media (max-width: 768px) {
