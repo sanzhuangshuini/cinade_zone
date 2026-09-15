@@ -33,8 +33,10 @@
       transition: filter 0.3s ease;
     }
 
-    .home-logo-hover:hover #side-logo {
-      filter: blur(10px) sepia(0.3);
+    @media (min-width: 769px) {
+      .home-logo-hover:hover #side-logo {
+        filter: blur(10px) sepia(0.3);
+      }
     }
 
     .home-logo-hover-text {
@@ -54,8 +56,10 @@
       pointer-events: none;
     }
 
-    .home-logo-hover:hover .home-logo-hover-text {
-      opacity: 1;
+    @media (min-width: 769px) {
+      .home-logo-hover:hover .home-logo-hover-text {
+        opacity: 1;
+      }
     }
 
     #main-area {
@@ -95,15 +99,6 @@
 
       #side-logo {
         width: 230px;
-      }
-
-      /* 手机端取消 logo 悬浮/点击交互效果 */
-      .home-logo-hover:hover #side-logo {
-        filter: none;
-      }
-
-      .home-logo-hover:hover .home-logo-hover-text {
-        opacity: 0;
       }
 
       #main-area {
