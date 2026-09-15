@@ -151,12 +151,12 @@ body.subpage #navbar a {
 }
 
 body.subpage #navbar a.active {
-  color: #9eba4a !important;
+  color: #ac2c2c !important;
 }
 
 body.subpage #navbar a:hover,
 body.subpage #navbar a:active {
-  color: #9eba4a;
+  color: #ac2c2c;
 }
 
 @media (max-width: 768px) {
