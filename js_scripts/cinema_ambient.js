@@ -19,8 +19,8 @@
 
   // 电脑端 / 手机端分别适配：画布分辨率与刷新间隔（毫秒）
   var PROFILES = {
-    desktop: { w: 64, h: 36, interval: 66 },  // ≈15 帧/秒
-    mobile: { w: 32, h: 18, interval: 200 }   // ≈5 帧/秒，更省电
+    desktop: { w: 256, h: 144, interval: 66 },  // ≈15 帧/秒
+    mobile: { w: 256, h: 144, interval: 200 }   // ≈5 帧/秒，更省电
   };
   var mobileQuery = window.matchMedia('(max-width: 768px)');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
