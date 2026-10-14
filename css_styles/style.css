@@ -523,6 +523,8 @@ body.home #navbar a:active {
   /* --cinema-fade：毛玻璃背景向下延伸并渐变消失的长度 */
   --cinema-fade: 320px;
   position: relative;
+  /* 氛围层左右多延伸了 30px，只裁水平方向，不裁向下渐变的部分 */
+  overflow-x: clip;
   width: 100%;
   background: transparent;
   display: flex;
@@ -531,16 +533,18 @@ body.home #navbar a:active {
 }
 
 /* 氛围背景层：由 js_scripts/cinema_ambient.js 插入的小 canvas，
-   直接使用视频原色（不压黑），拉伸放大后天然模糊。
-   高度比黑块多出 --cinema-fade，多出的部分用遮罩渐变到透明；
+   直接使用视频原色（不压黑），再加和画廊页 #hover-bg 一样的高斯模糊 blur(18px)。
+   上、左、右各多延伸 30px 避免模糊后边缘变淡（同 #hover-bg 的 -30px 做法）；
+   高度比黑块多出 --cinema-fade，多出的部分用遮罩渐变到透明（遮罩在滤镜之后生效）；
    z-index 为负，垫在下面的标题和文字下方 */
 .cinema-section .cinema-ambient {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(100% + var(--cinema-fade));
+  top: -30px;
+  left: -30px;
+  width: calc(100% + 60px);
+  height: calc(100% + var(--cinema-fade) + 30px);
   object-fit: cover;
+  filter: blur(18px);
   pointer-events: none;
   z-index: -1;
   -webkit-mask-image: linear-gradient(to bottom,
