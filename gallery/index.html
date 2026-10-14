@@ -106,6 +106,27 @@
         opacity: 1;
         transform: translateY(0);
       }
+
+      /* 手机端：底部导航栏文字叠加负片效果。
+         混合模式必须挂在 position:fixed 的 #navbar 上（它是层叠上下文根节点），
+         文字颜色是"白色白底上显示为原色"的反算值：#e0e0e0 -> 白底显示 #1f1f1f，
+         #53d3d3 -> 白底显示 #ac2c2c */
+      body.subpage #navbar {
+        mix-blend-mode: difference;
+      }
+
+      body.subpage #navbar a {
+        color: #e0e0e0;
+      }
+
+      body.subpage #navbar a.active {
+        color: #53d3d3 !important;
+      }
+
+      body.subpage #navbar a:hover,
+      body.subpage #navbar a:active {
+        color: #53d3d3;
+      }
     }
   </style>
 

@@ -512,3 +512,67 @@ body.home #navbar a:active {
     max-width: 100%;
   }
 }
+
+
+/* ================================
+   作品详情页顶部 Cinema 内嵌视频区（统一管理）
+   用到的页面：gallery/project_red_vein.html、gallery/dancing_bax.html
+   页面各自的差异（如电脑端底部内边距）写在各自页面里
+================================ */
+.cinema-section {
+  /* --cinema-fade：毛玻璃背景向下延伸并渐变消失的长度 */
+  --cinema-fade: 320px;
+  position: relative;
+  width: 100%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  padding: 80px 0 40px;
+}
+
+/* 氛围背景层：由 js_scripts/cinema_ambient.js 插入的小 canvas，
+   直接使用视频原色（不压黑），拉伸放大后天然模糊。
+   高度比黑块多出 --cinema-fade，多出的部分用遮罩渐变到透明；
+   z-index 为负，垫在下面的标题和文字下方 */
+.cinema-section .cinema-ambient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% + var(--cinema-fade));
+  object-fit: cover;
+  pointer-events: none;
+  z-index: -1;
+  -webkit-mask-image: linear-gradient(to bottom,
+      #000 calc(100% - var(--cinema-fade)),
+      rgba(0, 0, 0, 0.6) calc(100% - var(--cinema-fade) * 0.6),
+      rgba(0, 0, 0, 0.25) calc(100% - var(--cinema-fade) * 0.3),
+      transparent 100%);
+  mask-image: linear-gradient(to bottom,
+      #000 calc(100% - var(--cinema-fade)),
+      rgba(0, 0, 0, 0.6) calc(100% - var(--cinema-fade) * 0.6),
+      rgba(0, 0, 0, 0.25) calc(100% - var(--cinema-fade) * 0.3),
+      transparent 100%);
+}
+
+.cinema-section video {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .cinema-section {
+    --cinema-fade: 180px;
+    height: 40vh;
+    padding: 0;
+    align-items: center;
+    background: transparent;
+  }
+
+  .cinema-section video {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
